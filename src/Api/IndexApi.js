@@ -12,4 +12,5 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-export default api; // Exporta la instancia configurada
+export default api; 
+// Exporta la instancia configurada
