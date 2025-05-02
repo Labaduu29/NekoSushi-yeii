@@ -5,6 +5,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LayoutMain from '@/layouts/LayoutMain.vue';
 import PagRestau from '@/pages/PagRestau.vue';
 import ReservaForm from '@/pages/PagReserva.vue';
+import LoginCliente from '@/components/LoginCliente.vue';
 
 
 
@@ -16,10 +17,16 @@ const routes = [
       component: PagRestau,
     },
     {
+      path: 'PagLogin',
+      component: LoginCliente,
+      
+    },
+    {
       path: 'PagReserva',
       component: ReservaForm,
       
     },
+    
    
   ],}
 ];

@@ -7,21 +7,9 @@
         <h2>Reserva tu tatami🍣</h2>
 
         <form @submit.prevent="enviarReserva" class="formulario">
-          <label>Nombre:</label>
-          <input
-            v-model="reserva.nombre"
-            type="text"
-            required
-            placeholder="Tu nombre ronroneante..."
-          />
-
-          <label>Correo:</label>
-          <input
-            v-model="reserva.email"
-            type="email"
-            required
-            placeholder="tusushi@nekosama.com"
-          />
+          <p class="aviso-registro">
+            ⚠️ Debes estar registrado para realizar una reserva.
+          </p>
 
           <label>Fecha:</label>
           <input v-model="reserva.fecha" type="date" required />
@@ -57,13 +45,11 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import MenuComponent from '../components/MenuNumero1.vue'
 
 // Datos de la reserva
 const reserva = ref({
-  nombre: '',
-  email: '',
   fecha: '',
   hora: '',
   personas: 1,
@@ -72,7 +58,7 @@ const reserva = ref({
 const mensaje = ref('')
 const mesaSeleccionada = ref(null)
 
-//  mesas disponibles 
+// Mesas disponibles
 const mesas = ref([
   { id: 1, numero: 'A1', reservada: false },
   { id: 2, numero: 'A2', reservada: true },
@@ -81,17 +67,6 @@ const mesas = ref([
   { id: 5, numero: 'C1', reservada: true },
   { id: 6, numero: 'C2', reservada: false },
 ])
-
-// Validación: solo letras en el nombre
-watch(
-  () => reserva.value.nombre,
-  (nuevoValor) => {
-    const soloLetras = nuevoValor.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '')
-    if (nuevoValor !== soloLetras) {
-      reserva.value.nombre = soloLetras
-    }
-  }
-)
 
 // Simulamos el envío de la reserva
 const enviarReserva = async () => {
@@ -109,8 +84,6 @@ const enviarReserva = async () => {
 
     mensaje.value = '¡Miau! Tu reserva fue recibida con éxito 🐟'
     reserva.value = {
-      nombre: '',
-      email: '',
       fecha: '',
       hora: '',
       personas: 1,
@@ -122,6 +95,7 @@ const enviarReserva = async () => {
   }
 }
 </script>
+
 <style scoped>
 .reserva-wrapper {
   display: flex;
@@ -149,7 +123,7 @@ const enviarReserva = async () => {
 h2 {
   font-size: 26px;
   margin-bottom: 20px;
-  color: #2b94c5; /* dorado */
+  color: #2b94c5;
   font-weight: bold;
 }
 
@@ -237,6 +211,16 @@ button.reserva-btn:hover {
   font-weight: bold;
   color: #266c7f;
   animation: fadein 0.6s ease-in;
+}
+
+.aviso-registro {
+  background-color: #403f3f;
+  padding: 10px;
+  border-radius: 10px;
+  color: #f5c242;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 @keyframes fadein {
