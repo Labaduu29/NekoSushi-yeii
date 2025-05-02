@@ -92,7 +92,7 @@
   border-radius: 15px;
   background: rgba(25, 25, 25, 0.85); /* fondo oscuro translúcido */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-  color: #f0e6d2; /* tono cálido claro */
+  color: #2c2b2a; /* tono cálido claro */
   font-family: 'Segoe UI', sans-serif;
   backdrop-filter: blur(4px);
 }
