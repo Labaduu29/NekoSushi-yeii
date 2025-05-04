@@ -3,7 +3,7 @@
     <nav class="menu">
       <div class="menu-title">Neko Sushi 🍣</div>
       <ul class="menu-items">
-        <li @click="$router.push('/')">Volver</li>
+        <li @click="$router.push('/')">Inicio</li>
         <li @click="$router.push('/PagLogin')">Login</li>
         <li @click="$router.push('/PagReserva')">¡Reserva Aquí!</li>
       </ul>

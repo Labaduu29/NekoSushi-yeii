@@ -1,115 +1,172 @@
 <template>
-    <div class="login-container">
+  <div class="login-wrapper">
+    <!-- Panel Izquierdo -->
+    <div class="form-container">
+      <h1 class="logo">🍣 SushiApp</h1>
       <h2>{{ isLoginMode ? 'Iniciar sesión' : 'Registrarse' }}</h2>
+
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
           <label for="email">Correo electrónico</label>
           <input type="email" id="email" v-model="email" required />
         </div>
+
         <div class="form-group">
           <label for="password">Contraseña</label>
           <input type="password" id="password" v-model="password" required />
         </div>
+
         <div class="form-group" v-if="!isLoginMode">
           <label for="confirmPassword">Confirmar contraseña</label>
           <input type="password" id="confirmPassword" v-model="confirmPassword" required />
         </div>
-        <button type="submit">{{ isLoginMode ? 'Iniciar sesión' : 'Registrarse' }}</button>
+
+        <button type="submit">
+          {{ isLoginMode ? 'Iniciar sesión' : 'Registrarse' }}
+        </button>
+
+        <p v-if="error" class="error">{{ error }}</p>
+        <p v-if="success" class="success">{{ success }}</p>
       </form>
-  
-      <p v-if="error" class="error">{{ error }}</p>
-      <p v-if="success" class="success">{{ success }}</p>
-  
+
       <p class="switch-mode">
         <a href="#" @click.prevent="toggleMode">
           {{ isLoginMode ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión' }}
         </a>
       </p>
     </div>
-  </template>
-  
-  <script setup>
-  import { ref } from 'vue'
-  
-  // Simulación de una base de datos local en memoria
-  const users = ref({})
-  
-  const email = ref('')
-  const password = ref('')
-  const confirmPassword = ref('')
-  const error = ref('')
-  const success = ref('')
-  const isLoginMode = ref(false)
-  
-  const handleSubmit = () => {
-    error.value = ''
-    success.value = ''
-  
-    const userEmail = email.value.trim().toLowerCase()
-  
-    if (isLoginMode.value) {
-      // Modo login
-      if (users.value[userEmail] && users.value[userEmail] === password.value) {
-        success.value = '¡Inicio de sesión exitoso!'
-      } else {
-        error.value = 'Correo o contraseña incorrectos.'
-      }
-    } else {
-      // Modo registro
-      if (password.value !== confirmPassword.value) {
-        error.value = 'Las contraseñas no coinciden.'
-        return
-      }
-  
-      if (users.value[userEmail]) {
-        error.value = 'El usuario ya está registrado.'
-        return
-      }
-  
-      users.value[userEmail] = password.value
-      success.value = '¡Registro exitoso!'
-      email.value = ''
-      password.value = ''
-      confirmPassword.value = ''
-    }
+
+    <!-- Panel Derecho con imagen -->
+    <div class="image-container">
+      <img
+        src="https://mrtsbakery.com.au/cdn/shop/articles/unnamed_388f2e43-0619-438d-9212-2539bf2c70d5_800x.jpg?v=1578206798"
+        alt="Sushi Login"
+      />
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const error = ref('')
+const success = ref('')
+const isLoginMode = ref(true)
+const users = ref({})
+
+onMounted(() => {
+  const storedUsers = localStorage.getItem('users')
+  if (storedUsers) users.value = JSON.parse(storedUsers)
+})
+
+const handleSubmit = () => {
+  error.value = ''
+  success.value = ''
+  const userEmail = email.value.trim().toLowerCase()
+
+  if (!userEmail.includes('@')) {
+    error.value = 'Correo inválido.'
+    return
   }
-  
-  const toggleMode = () => {
-    isLoginMode.value = !isLoginMode.value
-    error.value = ''
-    success.value = ''
+
+  if (password.value.length < 6) {
+    error.value = 'La contraseña debe tener al menos 6 caracteres.'
+    return
+  }
+
+  if (isLoginMode.value) {
+    if (users.value[userEmail] === password.value) {
+      success.value = '¡Inicio de sesión exitoso!'
+    } else {
+      error.value = 'Correo o contraseña incorrectos.'
+    }
+  } else {
+    if (password.value !== confirmPassword.value) {
+      error.value = 'Las contraseñas no coinciden.'
+      return
+    }
+
+    if (users.value[userEmail]) {
+      error.value = 'El usuario ya está registrado.'
+      return
+    }
+
+    users.value[userEmail] = password.value
+    localStorage.setItem('users', JSON.stringify(users.value))
+    success.value = '¡Registro exitoso!'
     email.value = ''
     password.value = ''
     confirmPassword.value = ''
   }
-  </script>
-  
- <style scoped>
-.login-container {
-  max-width: 400px;
-  margin: 3rem auto;
-  padding: 2rem;
-  border-radius: 15px;
-  background: rgba(25, 25, 25, 0.85); /* fondo oscuro translúcido */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
-  color: #2c2b2a; /* tono cálido claro */
-  font-family: 'Segoe UI', sans-serif;
-  backdrop-filter: blur(4px);
+}
+
+const toggleMode = () => {
+  isLoginMode.value = !isLoginMode.value
+  email.value = ''
+  password.value = ''
+  confirmPassword.value = ''
+  error.value = ''
+  success.value = ''
+}
+</script>
+
+<style scoped>
+.login-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Permite que se acomode en pantallas pequeñas */
+  min-height: 100vh;
+  background-color: #1f1f1f;
+}
+
+.form-container {
+  flex: 1 1 400px;
+  padding: 3rem;
+  background-color: #1f1f1f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 300px;
+}
+
+.image-container {
+  flex: 1 1 400px;
+  background-color: #000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-left: 5px solid #f5c242;
+}
+
+.logo {
+  font-size: 2rem;
+  color: #f5c242;
+  margin-bottom: 1.5rem;
 }
 
 h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-  color: #266c7f; /* dorado tenue */
+  color: #f5c242;
+  margin-bottom: 1rem;
 }
 
 .form-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
 }
 
 label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   color: #e0c9a6;
 }
 
@@ -117,27 +174,27 @@ input {
   width: 100%;
   padding: 0.6rem;
   background-color: #2f2f2f;
-  color: #f9f5ee;
   border: 1px solid #5c4b3b;
-  border-radius: 8px;
-  font-size: 1rem;
+  color: #fff8e7;
+  border-radius: 6px;
 }
 
 button {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 1rem;
+  width: fit-content;
+  padding: 0.6rem 1.5rem;
+  margin: 1rem auto 0;
   background-color: #f5c242;
   color: #1f1f1f;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: block;
 }
 
 button:hover {
-  background-color: #f5c242;
+  background-color: #f7d35e;
 }
 
 .error {
@@ -154,14 +211,18 @@ button:hover {
 
 .switch-mode {
   margin-top: 1.5rem;
+  color: #f5c242;
   text-align: center;
 }
 
-.switch-mode a {
-  color: #f5c242;
-  text-decoration: underline;
-  cursor: pointer;
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .image-container img {
+    height: 300px;
+  }
 }
 </style>
-
-  
