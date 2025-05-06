@@ -55,7 +55,6 @@ const confirmPassword = ref('')
 const error = ref('')
 const success = ref('')
 const isLoginMode = ref(true)
-const users = ref({})
 
 onMounted(() => {
   const storedUsers = localStorage.getItem('users')
