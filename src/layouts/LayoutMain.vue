@@ -4,7 +4,7 @@
       <div class="menu-title">Neko Sushi 🍣</div>
       <ul class="menu-items">
         <li @click="$router.push('/')">Inicio</li>
-        <li @click="$router.push('/PagLogin')">Login</li>
+        <li @click="$router.push('/PagLogin')">Registrate</li>
         <li @click="$router.push('/PagReserva')">¡Reserva Aquí!</li>
       </ul>
     </nav>
@@ -36,7 +36,7 @@ export default {
 }
 
 .menu-title {
-  color: #fefefe;
+  color: #f5c242;
   font-size: 1.8rem;
   font-weight: bold;
   letter-spacing: 1px;
@@ -52,8 +52,8 @@ export default {
 
 .menu-items li {
   padding: 0.6rem 1.6rem;
-  background: linear-gradient(135deg, #243b55, #141e30);
-  color: #ffffff;
+  background: linear-gradient(135deg, #f8e672, #ffbb55);
+  color: #060606;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 8px;
@@ -63,7 +63,7 @@ export default {
 }
 
 .menu-items li:hover {
-  background: linear-gradient(135deg, #2b2b6f, #5e5ecf);
+  background: linear-gradient(135deg, #ee8433, #ffc25f);
   transform: translateY(-2px) scale(1.05);
   box-shadow: 0 6px 12px rgba(206, 210, 211, 0.4);
 }

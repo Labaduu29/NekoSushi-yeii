@@ -123,7 +123,7 @@ const enviarReserva = async () => {
 h2 {
   font-size: 26px;
   margin-bottom: 20px;
-  color: #2b94c5;
+  color: #f5c242;
   font-weight: bold;
 }
 

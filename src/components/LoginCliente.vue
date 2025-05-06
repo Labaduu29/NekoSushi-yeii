@@ -2,7 +2,6 @@
   <div class="login-wrapper">
     <!-- Panel Izquierdo -->
     <div class="form-container">
-      <h1 class="logo">🍣 SushiApp</h1>
       <h2>{{ isLoginMode ? 'Iniciar sesión' : 'Registrarse' }}</h2>
 
       <form @submit.prevent="handleSubmit">
@@ -55,6 +54,7 @@ const confirmPassword = ref('')
 const error = ref('')
 const success = ref('')
 const isLoginMode = ref(true)
+const users = ref({})
 
 onMounted(() => {
   const storedUsers = localStorage.getItem('users')
@@ -115,7 +115,7 @@ const toggleMode = () => {
 <style scoped>
 .login-wrapper {
   display: flex;
-  flex-wrap: wrap; /* Permite que se acomode en pantallas pequeñas */
+  flex-wrap: wrap;
   min-height: 100vh;
   background-color: #1f1f1f;
 }
@@ -210,8 +210,18 @@ button:hover {
 
 .switch-mode {
   margin-top: 1.5rem;
-  color: #f5c242;
   text-align: center;
+}
+
+.switch-mode a {
+  color: #f5c242;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.switch-mode a:hover {
+  color: #f7d35e;
 }
 
 /* Responsive para pantallas pequeñas */
