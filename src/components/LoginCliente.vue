@@ -26,6 +26,11 @@
 
         <p v-if="error" class="error">{{ error }}</p>
         <p v-if="success" class="success">{{ success }}</p>
+
+        <!-- ✅ Botón para reservar que aparece solo tras un registro exitoso -->
+        <button v-if="success && !isLoginMode" @click="irAReserva" class="reserva-btn">
+          ¡Haz tu primera reserva! 🍣
+        </button>
       </form>
 
       <p class="switch-mode">
@@ -47,6 +52,9 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const email = ref('')
 const password = ref('')
@@ -109,6 +117,11 @@ const toggleMode = () => {
   confirmPassword.value = ''
   error.value = ''
   success.value = ''
+}
+
+// ✅ Ir a reserva
+const irAReserva = () => {
+  router.push('/PagReserva') // asegúrate que esa ruta exista en tu router/index.js
 }
 </script>
 
@@ -222,6 +235,21 @@ button:hover {
 
 .switch-mode a:hover {
   color: #f7d35e;
+}
+
+.reserva-btn {
+  background-color: #4d99bc;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  transition: 0.3s;
+  margin-top: 1rem;
+}
+
+.reserva-btn:hover {
+  background-color: #366687;
+  transform: scale(1.05);
 }
 
 /* Responsive para pantallas pequeñas */
