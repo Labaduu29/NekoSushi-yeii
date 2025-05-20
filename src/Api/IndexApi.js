@@ -3,7 +3,7 @@ import authService from '@/services/authService'
 import router from '@/router'
 
 const api = axios.create({
-  baseURL: 'http://10.10.8.237:3000/api/v1',
+  baseURL: 'http://10.10.8.237:3000', // ✅ Ajustado aquí
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -11,10 +11,10 @@ const api = axios.create({
   }
 })
 
-// Request interceptor
+// Interceptor de solicitud
 api.interceptors.request.use(async (config) => {
   const token = localStorage.getItem('auth_token')
-  
+
   if (token) {
     if (authService._isTokenExpired()) {
       try {
@@ -29,13 +29,13 @@ api.interceptors.request.use(async (config) => {
       config.headers.Authorization = `Bearer ${token}`
     }
   }
-  
+
   return config
 }, error => {
   return Promise.reject(error)
 })
 
-// Response interceptor
+// Interceptor de respuesta
 api.interceptors.response.use(response => {
   return response
 }, error => {
@@ -53,7 +53,7 @@ api.interceptors.response.use(response => {
         break
     }
   }
-  
+
   return Promise.reject(error)
 })
 

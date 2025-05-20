@@ -3,7 +3,7 @@ import api from '../Api/IndexApi'  // Ruta relativa correcta
 export default {
   async register(userData) {
     try {
-      const response = await api.post('/auth/register', userData)
+      const response = await api.post('/usuarios/registro', userData) // ✅ corregido
       this._storeAuthData(response.data)
       return response.data
     } catch (error) {
@@ -13,7 +13,7 @@ export default {
 
   async login(credentials) {
     try {
-      const response = await api.post('/auth/login', credentials)
+      const response = await api.post('/auth/login', credentials) // ← asegúrate que esta ruta existe en tu backend
       this._storeAuthData(response.data)
       return response.data
     } catch (error) {
@@ -23,7 +23,7 @@ export default {
 
   async refreshToken() {
     try {
-      const response = await api.post('/auth/refresh-token')
+      const response = await api.post('/auth/refresh-token') // ← asegúrate que esta ruta existe en tu backend
       this._storeAuthData(response.data)
       return response.data
     } catch (error) {

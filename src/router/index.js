@@ -6,6 +6,7 @@ import LayoutMain from '@/layouts/LayoutMain.vue';
 import PagRestau from '@/pages/PagRestau.vue';
 import ReservaForm from '@/pages/PagReserva.vue';
 import LoginCliente from '@/components/LoginCliente.vue';
+import MisReservas from '@/components/MisReservas.vue';
 
 
 
@@ -24,6 +25,11 @@ const routes = [
     {
       path: 'PagReserva',
       component: ReservaForm,
+      
+    },
+    {
+      path: 'PagMisReservas',
+      component: MisReservas,
       
     },
     
