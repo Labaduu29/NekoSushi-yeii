@@ -3,7 +3,7 @@ import authService from '@/services/authService'
 import router from '@/router'
 
 const api = axios.create({
-  baseURL: 'http://10.10.8.237:3000', // ✅ Ajustado aquí
+  baseURL: process.env.VUE_APP_API_URL || 'http://localhost:3000', // Cambia a la URL de tu backend real si es necesario
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
