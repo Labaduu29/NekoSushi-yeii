@@ -130,7 +130,7 @@ const handleSubmit = async () => {
   try {
     if (isLoginMode.value) {
       // 🔐 Iniciar sesión
-      const res = await fetch('http://localhost:3000/api/login', {
+      const res = await fetch('http://localhost:3000/usuarios/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: userEmail, password: password.value })
@@ -149,7 +149,7 @@ const handleSubmit = async () => {
         error.value = 'Las contraseñas no coinciden.'
         return
       }
-      const res = await fetch('http://localhost:3000/api/register', {
+      const res = await fetch('http://localhost:3000/usuarios/registro', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: userEmail, password: password.value })
