@@ -1,24 +1,17 @@
 # mossy2
 
-## Project setup
-```
+Aplicación web para un restaurante con temática de sushi y gatos. Permite a los usuarios registrarse, iniciar sesión y hacer reservas de manera sencilla y divertida.
+
+## Demo
+
+(Puedes añadir una imagen o GIF de la interfaz aquí para mostrar cómo se ve la app)
+
+## Requisitos previos
+
+- Node.js >= 16.x
+- npm >= 8.x
+
+## Instalación
+
+```bash
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
