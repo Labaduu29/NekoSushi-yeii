@@ -1,24 +1,60 @@
-# mossy2
+# Neko Sushi
 
-## Project setup
-```
+Aplicación web para un restaurante con temática de sushi y gatos. Permite a los usuarios registrarse, iniciar sesión y hacer reservas de manera sencilla y divertida.
+
+## Demo
+
+![alt text](https://media1.tenor.com/m/XUfVe6DNCrgAAAAd/sushi-sushicat.gif)
+
+
+## Requisitos previos
+
+- Node.js >= 16.x
+- npm >= 8.x
+
+## Instalación
+
+```bash
 npm install
 ```
 
-### Compiles and hot-reloads for development
-```
+## Uso en desarrollo
+
+```bash
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
+## Compilar para producción
+
+```bash
 npm run build
 ```
 
-### Lints and fixes files
-```
+## Linting
+
+```bash
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Funcionalidades principales
+
+- Registro de usuarios.
+- Inicio de sesión.
+- Realización y gestión de reservas.
+- Temática visual inspirada en sushi y gatos.
+
+## Cómo contribuir
+
+1. Haz un fork del repositorio.
+2. Crea una rama (`git checkout -b feature/nueva-feature`).
+3. Realiza tus cambios y haz commit (`git commit -am 'Agrega nueva feature'`).
+4. Haz push a la rama (`git push origin feature/nueva-feature`).
+5. Abre un Pull Request.
+
+## Licencia
+
+MIT
+
+## Más información
+
+Consulta la [documentación de Vue CLI](https://cli.vuejs.org/config/).
