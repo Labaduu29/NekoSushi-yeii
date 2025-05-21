@@ -1,9 +1,10 @@
 import api from '../Api/IndexApi'  // Ruta relativa correcta
 
 export default {
+  // Métodos de autenticación
   async register(userData) {
     try {
-      const response = await api.post('/usuarios/registro', userData) // ✅ corregido
+      const response = await api.post('/usuarios/registro', userData)
       this._storeAuthData(response.data)
       return response.data
     } catch (error) {
@@ -13,7 +14,7 @@ export default {
 
   async login(credentials) {
     try {
-      const response = await api.post('/auth/login', credentials) // ← asegúrate que esta ruta existe en tu backend
+      const response = await api.post('/auth/login', credentials)
       this._storeAuthData(response.data)
       return response.data
     } catch (error) {
@@ -23,7 +24,7 @@ export default {
 
   async refreshToken() {
     try {
-      const response = await api.post('/auth/refresh-token') // ← asegúrate que esta ruta existe en tu backend
+      const response = await api.post('/auth/refresh-token')
       this._storeAuthData(response.data)
       return response.data
     } catch (error) {
@@ -48,6 +49,52 @@ export default {
     return user ? JSON.parse(user) : null
   },
 
+  // Métodos generales HTTP
+  async get(url, config = {}) {
+    try {
+      const response = await api.get(url, config)
+      return response.data
+    } catch (error) {
+      throw this._handleHttpError(error)
+    }
+  },
+
+  async post(url, data, config = {}) {
+    try {
+      const response = await api.post(url, data, config)
+      return response.data
+    } catch (error) {
+      throw this._handleHttpError(error)
+    }
+  },
+
+  async put(url, data, config = {}) {
+    try {
+      const response = await api.put(url, data, config)
+      return response.data
+    } catch (error) {
+      throw this._handleHttpError(error)
+    }
+  },
+
+  async patch(url, data, config = {}) {
+    try {
+      const response = await api.patch(url, data, config)
+      return response.data
+    } catch (error) {
+      throw this._handleHttpError(error)
+    }
+  },
+
+  async delete(url, config = {}) {
+    try {
+      const response = await api.delete(url, config)
+      return response.data
+    } catch (error) {
+      throw this._handleHttpError(error)
+    }
+  },
+
   // Métodos privados
   _storeAuthData(data) {
     localStorage.setItem('auth_token', data.token)
@@ -61,9 +108,12 @@ export default {
   },
 
   _handleAuthError(error) {
-    const message = error.response?.data?.message || 
-                   error.message || 
-                   'Error de autenticación'
+    const message = error.response?.data?.message || error.message || 'Error de autenticación'
     throw new Error(message)
+  },
+
+  _handleHttpError(error) {
+    const message = error.response?.data?.message || error.message || 'Error en la solicitud'
+    return new Error(message)
   }
 }
