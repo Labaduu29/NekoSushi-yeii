@@ -3,8 +3,7 @@
 Aplicación web para un restaurante con temática de sushi y gatos. Permite a los usuarios registrarse, iniciar sesión y hacer reservas de manera sencilla y divertida.
 
 ## Demo
-
-(Puedes añadir una imagen o GIF de la interfaz aquí para mostrar cómo se ve la app)
+https://tenor.com/view/sushi-sushicat-gif-6721575695829240504
 
 ## Requisitos previos
 
